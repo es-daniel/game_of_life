@@ -2,19 +2,20 @@
 class GameOfLife
   require_relative 'utils'
 
-  attr_accessor :utils
+  attr_accessor :utils, :generations
 
   def initialize
     @utils = Utils.new
     @grid = utils.build_new_grid
     # Create an initial pattern
     utils.seed(@grid)
+    utils.draw(@grid)
   end
 
   # This method start the game
   def start
     n = 1
-    while n <= 15
+    while n <= @generations
       reset_temp_grid
       @grid.each_with_index do |row, i|
         row.each_with_index { |cell, j| update_cell(i, j, cell, count_neighbors(i, j, row)) }
@@ -23,6 +24,11 @@ class GameOfLife
       utils.draw(@grid)
       n += 1
     end
+  end
+
+  # This method will determine the number of generations to be displayed
+  def init_generations
+    @generations = rand(5..20)
   end
 
   # This method update de current cells

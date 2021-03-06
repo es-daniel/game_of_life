@@ -11,4 +11,17 @@ describe GameOfLife do
     end
   end
 
+  describe '.init_generations' do
+    context 'given zero params' do
+      it 'should return an Integer' do
+        expect(game.init_generations).to be_a(Integer)
+      end
+
+      it 'should initialize the number of generations' do
+        expect(game.init_generations).to eq(game.generations)
+      end
+
+    end
+  end
+
 end
