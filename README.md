@@ -3,6 +3,12 @@
 This is a version of the game called; Game of Life.
 This game was created by Daniel Elizondo Sanchez .
 
+## Technology's versions used
+
+* Bundler 2.1.4
+
+* Ruby 2.7.1p83
+
 ## Setup
 
 Clone the  [repository](https://github.com/es-daniel/game_of_life) :
@@ -40,4 +46,7 @@ Run the test:
 ```bash
   bundle exec rspec
 ```
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
 
