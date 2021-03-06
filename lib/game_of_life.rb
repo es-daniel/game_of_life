@@ -55,7 +55,7 @@ class GameOfLife
 
   # This method add random living cells for the initial pattern
   def rand_living_cell(row)
-    row[rand(0..4)] = '▣'
+    row[rand(5..15)] = '▣'
   end
 
   # This method draw the current grid in the console
@@ -68,7 +68,7 @@ class GameOfLife
 
   # This method creates a new grid
   def build_new_grid
-    Array.new(5) { Array.new(5) { '▢' } }
+    Array.new(20) { Array.new(25) { '▢' } }
   end
 
   private
