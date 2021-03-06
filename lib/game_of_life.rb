@@ -4,6 +4,7 @@ class GameOfLife
     @grid = build_new_grid
   end
 
+  # This method start the game
   def start
     n = 1
     while n <= 15
@@ -13,12 +14,15 @@ class GameOfLife
       end
       @grid = @temp_grid
       draw
-      puts '----- A NEW COLONY BEGIN -----'
       n += 1
     end
   end
 
   # This method update de current cells
+  # @param axis_i == current row index
+  # @param axis_j == current cell index
+  # @param cell == current cell
+  # @cell_neighbors ==  number of cell's neighbors
   def update_cell(axis_i, axis_j, cell, cell_neighbors)
     if (cell.eql?('▣') && [2, 3].include?(cell_neighbors)) || (cell.eql?('▢') && cell_neighbors == 3)
       @temp_grid[axis_i][axis_j] = '▣'
@@ -56,6 +60,7 @@ class GameOfLife
 
   # This method draw the current grid in the console
   def draw
+    puts '----- A NEW COLONY BEGIN -----'
     @grid.each do |row|
       puts row.join(' ')
     end
