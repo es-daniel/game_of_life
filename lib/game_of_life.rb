@@ -1,7 +1,14 @@
 # Game structure class
 class GameOfLife
+  require_relative 'utils'
+
+  attr_accessor :utils
+
   def initialize
-    @grid = build_new_grid
+    @utils = Utils.new
+    @grid = utils.build_new_grid
+    # Create an initial pattern
+    utils.seed(@grid)
   end
 
   # This method start the game
@@ -13,7 +20,7 @@ class GameOfLife
         row.each_with_index { |cell, j| update_cell(i, j, cell, count_neighbors(i, j, row)) }
       end
       @grid = @temp_grid
-      draw
+      utils.draw(@grid)
       n += 1
     end
   end
@@ -46,30 +53,6 @@ class GameOfLife
     cell_neighbors.sum(&:to_i)
   end
 
-  # This method creates initial pattern
-  def seed
-    @grid.each do |row|
-      2.times { |_| rand_living_cell(row) }
-    end
-  end
-
-  # This method add random living cells for the initial pattern
-  def rand_living_cell(row)
-    row[rand(5..15)] = '▣'
-  end
-
-  # This method draw the current grid in the console
-  def draw
-    puts '----- A NEW COLONY BEGIN -----'
-    @grid.each do |row|
-      puts row.join(' ')
-    end
-  end
-
-  # This method creates a new grid
-  def build_new_grid
-    Array.new(20) { Array.new(25) { '▢' } }
-  end
 
   private
 
@@ -99,7 +82,7 @@ class GameOfLife
 
   # This method reset the temp grid
   def reset_temp_grid
-    @temp_grid = build_new_grid
+    @temp_grid = utils.build_new_grid
   end
 
 end
