@@ -2,14 +2,14 @@
 class GameOfLife
   require_relative 'utils'
 
-  attr_accessor :utils, :generations
+  attr_accessor :utils, :generations, :grid
 
   def initialize
     @utils = Utils.new
     @grid = utils.build_new_grid
     # Create an initial pattern
-    utils.seed(@grid)
-    utils.draw(@grid)
+    utils.seed(grid)
+    utils.draw(grid)
   end
 
   # This method start the game
@@ -17,11 +17,11 @@ class GameOfLife
     n = 1
     while n <= @generations
       reset_temp_grid
-      @grid.each_with_index do |row, i|
+      grid.each_with_index do |row, i|
         row.each_with_index { |cell, j| update_cell(i, j, cell, count_neighbors(i, j, row)) }
       end
-      @grid = @temp_grid
-      utils.draw(@grid)
+      grid = @temp_grid
+      utils.draw(grid)
       n += 1
     end
   end
@@ -67,7 +67,7 @@ class GameOfLife
   def neighbor_axis_j(index)
     case index
     when 0 then 0..1
-    when @grid.length - 1 then (index - 1)..index
+    when grid.length - 1 then (index - 1)..index
     else (index - 1)..(index + 1)
     end
   end
@@ -76,14 +76,14 @@ class GameOfLife
   # @param axis_i == current row index
   # @param axis_j == current cell index
   def top_neighbors(axis_i, axis_j)
-    @grid[axis_i - 1][neighbor_axis_j(axis_j)].count { |n| n == '▣' } unless axis_i.zero?
+    grid[axis_i - 1][neighbor_axis_j(axis_j)].count { |n| n == '▣' } unless axis_i.zero?
   end
 
   # This method count bottom neighbors
   # @param axis_i == current row index
   # @param axis_j == current cell index
   def bottom_neighbors(axis_i, axis_j)
-    @grid[axis_i + 1][neighbor_axis_j(axis_j)].count { |n| n == '▣' } if (@grid.length - 1) != axis_i
+    grid[axis_i + 1][neighbor_axis_j(axis_j)].count { |n| n == '▣' } if (grid.length - 1) != axis_i
   end
 
   # This method reset the temp grid
