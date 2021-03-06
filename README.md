@@ -26,7 +26,7 @@ cd game_of_life
 Install the gems in Gemfile:
 
 ```bash
-bundle install --path .bundle
+bundle install
 ```
 
 ## Running the app
