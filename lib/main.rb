@@ -10,4 +10,5 @@ puts '▢ --> This represent a dead cell'
 
 @game.seed
 
-@game.draw
+@game.start
+
